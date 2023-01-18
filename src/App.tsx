@@ -1,11 +1,22 @@
 import React from "react";
+import Button from "./components/Button";
+import Card from "./components/Card";
+import Layout from "./components/Layout/Layout";
+import Title from "./components/Title";
 
 type Props = {};
 
 export const App: React.FC<Props> = ({}) => {
   return (
     <>
-      <h1 className="text-red-500">Hello Friend</h1>
+      <Layout>
+        <div className="container mx-auto">
+          <Card>
+            <Title h1>Hello Friend</Title>
+            <Button variant="secondary">GM</Button>
+          </Card>
+        </div>
+      </Layout>
     </>
   );
 };
