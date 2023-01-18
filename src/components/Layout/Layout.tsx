@@ -10,7 +10,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
     <>
       <div>
         <Navbar />
-        <div className="py-2">{children}</div>
+        <div className="py-2 container mx-auto">{children}</div>
       </div>
     </>
   );

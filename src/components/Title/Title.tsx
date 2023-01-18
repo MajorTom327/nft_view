@@ -4,6 +4,7 @@ import React from "react";
 type Props = {
   children: React.ReactNode;
   className?: string;
+  center?: boolean;
   h1?: boolean;
   h2?: boolean;
   h3?: boolean;
@@ -15,6 +16,7 @@ type Props = {
 export const Title: React.FC<Props> = ({
   children,
   className,
+  center,
   h1,
   h2,
   h3,
@@ -25,6 +27,7 @@ export const Title: React.FC<Props> = ({
   const classes = classNames(
     "font-semibold",
     {
+      "text-center": center,
       "text-2xl": h1,
       "text-xl": h2,
       "text-lg": h3,
