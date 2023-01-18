@@ -1,7 +1,8 @@
 import Eth from "./Eth";
 import { AbiItem } from 'web3-utils';
-import { Contract } from 'web3-eth-contract';
-import { flatten, prop, sortBy } from "ramda";
+import { Contract, EventData } from 'web3-eth-contract';
+import { flatten, prop, reverse, sortBy, map, reject } from "ramda";
+import { propNotEq } from "ramda-adjunct";
 
 export class NFT extends Eth {
   contractAddress: string;
@@ -41,11 +42,15 @@ export class NFT extends Eth {
   }
 
   getTransferEvents(wallet: string) {
-    return Promise.all([
+    return Promise.allSettled([
       this.getReceived(wallet),
       this.getSent(wallet)
-    ]).then((events) => Promise.resolve(flatten(events)))
-      .then(sortBy(prop('blockNumber')))
+    ])
+      .then<PromiseSettledResult<EventData[]>[]>((events) => reject(propNotEq('status', 'fulfilled'), events))
+      .then<EventData[][]>((events) => map<PromiseSettledResult<EventData[]>, EventData[]>(prop<EventData[]>('value'), events))
+      .then<EventData[]>(flatten)
+      .then<EventData[]>(sortBy(prop('blockNumber')))
+      .then<EventData[]>(reverse)
   }
 
   // Bug: That do not handle the case someone send a token to himself
