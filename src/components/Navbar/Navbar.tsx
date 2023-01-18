@@ -18,7 +18,7 @@ export const Navbar: React.FC<Props> = ({}) => {
           <NavbarBrand to="/">NFT Viewer</NavbarBrand>
           <NavbarItem>{eth}</NavbarItem>
           <div className="flex gap-2 text-center">
-            <NavbarItem to="/">About</NavbarItem>
+            <NavbarItem to="/events">About</NavbarItem>
             {wallet ? (
               <NavbarItem to="/wallet">{shortWallet}</NavbarItem>
             ) : (

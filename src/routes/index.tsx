@@ -1,9 +1,15 @@
 import React from "react";
-import { createHashRouter, createBrowserRouter } from "react-router-dom";
+import {
+  createHashRouter,
+  createBrowserRouter,
+  Routes,
+} from "react-router-dom";
 import Root from "./Root";
 import Home from "./Home";
 import Connect from "./Connect";
 import ErrorBoundary from "../components/ErrorBoundary";
+import Events from "./Events";
+import EventsList from "./Events/EventList";
 
 const createRouter =
   process.env.NODE_ENV === "development"
@@ -25,6 +31,16 @@ export const router = createRouter([
         path: "/connect",
         element: <Connect />,
       },
+      {
+        path: "/events",
+        element: <Events />,
+        children: [
+          {
+            path: "/events",
+            element: <EventsList />,
+          },
+        ],
+      },
       // {
       //   path: "/supply",
       //   element: <Supply />,
@@ -36,5 +52,7 @@ export const router = createRouter([
     ],
   },
 ]);
+
+
 
 export default router;

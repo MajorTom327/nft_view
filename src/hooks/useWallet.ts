@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Web3Context } from "../context/Web3Context";
 import { useWeb3 } from "./useWeb3";
 
-const shorterWallet = (wallet: string) => {
+export const shorterWallet = (wallet: string) => {
   return `${wallet.slice(0, 6)}...${wallet.slice(-4)}`
 }
 
