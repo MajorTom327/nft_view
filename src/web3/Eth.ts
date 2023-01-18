@@ -1,4 +1,4 @@
-import { head } from 'ramda';
+import { head, isNil } from 'ramda';
 import Web3 from 'web3';
 
 export class Eth {
@@ -18,6 +18,11 @@ export class Eth {
   async ensureAccounts() {
     this.wallets = await this.web3.eth.getAccounts();
     this.wallet = this.web3.eth.defaultAccount || head(this.wallets) || null;
+  }
+
+  getBalance() {
+    if (isNil(this.wallet)) return Promise.resolve('0');
+    return this.web3.eth.getBalance(this.wallet);
   }
 }
 

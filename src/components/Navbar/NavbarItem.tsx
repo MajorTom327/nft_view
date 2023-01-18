@@ -1,10 +1,11 @@
 import classNames from "classnames";
+import { isNil } from "ramda";
 import React from "react";
 import { Link } from "react-router-dom";
 
 type Props = {
   children: React.ReactNode;
-  to: string;
+  to?: string;
   className?: string;
   brand?: boolean;
 };
@@ -21,9 +22,14 @@ export const NavbarItem: React.FC<Props> = ({
     {
       "text-2xl": brand,
       "text-lg": !brand,
+      "cursor-default": isNil(to),
     },
     className
   );
+
+  if (isNil(to)) {
+    return <div className={classes}>{children}</div>;
+  }
   return (
     <Link to={to} className={classes}>
       {children}

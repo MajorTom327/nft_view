@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import Title from "../components/Title";
+import useBalance from "../hooks/useBalance";
 
 type Props = {};
 

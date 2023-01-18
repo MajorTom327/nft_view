@@ -1,13 +1,14 @@
 import React, { createContext, useEffect, useMemo, useState } from "react";
 import Eth from "../web3/Eth";
 
-type Web3Context = {
+export type Web3ContextType = {
   web3: Eth;
   wallet: string | null;
 };
 
-export const Web3Context = createContext<Web3Context>({
+export const Web3Context = createContext<Web3ContextType>({
   web3: new Eth(),
+  wallet: null,
 });
 
 const { Provider } = Web3Context;
@@ -34,7 +35,7 @@ export const Web3Provider: React.FC<{ children: React.ReactNode }> = ({
     return () => clearInterval(i);
   }, [web3]);
 
-  const value: Web3Context = {
+  const value: Web3ContextType = {
     web3,
     wallet,
   };
