@@ -6,6 +6,7 @@ type ColumnDefinition = {
   key: string;
   label: string;
   transform?: (value: any) => string;
+  component?: React.FC<{ value: any; row: any }>;
 };
 
 type Props = {
@@ -37,6 +38,14 @@ export const Table: React.FC<Props> = ({ columns, data }) => {
                 const transformed = column.transform
                   ? column.transform(value)
                   : value;
+
+                if (column.component) {
+                  return (
+                    <td className={cellClasses} key={column.key}>
+                      <column.component value={value} row={row} />
+                    </td>
+                  );
+                }
                 return (
                   <td className={cellClasses} key={column.key}>
                     {transformed}

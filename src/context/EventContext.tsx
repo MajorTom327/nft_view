@@ -1,5 +1,5 @@
 import Bluebird from "bluebird";
-import { flatten, values } from "ramda";
+import { assoc, compose, flatten, values } from "ramda";
 import React, {
   createContext,
   useContext,
@@ -29,10 +29,19 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({
   const [events, setEvents] = useState<any[]>([]);
 
   useEffect(() => {
-    if (!wallet) return;
-    Bluebird.map(values(nftContext), (nft) =>
-      nft.getTransferEvents(wallet)
-    ).then((events) => {
+    if (!wallet) return setEvents([]);
+    Bluebird.map(values(nftContext), (nft) => {
+      return nft.getTransferEvents(wallet).then((event) => {
+        // @ts-ignore
+        return event.map(
+          compose(
+            assoc("name", nft.name),
+            // @ts-ignore
+            assoc("symbol", nft.symbol)
+          )
+        );
+      });
+    }).then((events) => {
       setEvents(flatten(events));
     });
   }, [wallet]);

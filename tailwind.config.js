@@ -5,9 +5,14 @@ const R = require('ramda');
 
 const colors = {
   primary: "#003566",
+  // primary: "#b8c0ff",
   secondary: "#ffd60a",
+  // secondary: "#c8b6ff",
   accent: "#ff4d4f",
+  // accent: "#9bf6ff",
   base: "#001d3d",
+  // base: "#e0fbfc",
+  // base: "#ffd6ff",
 
   light: "#ffffff",
   dark: "#000814",
