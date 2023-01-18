@@ -1,6 +1,8 @@
 import esbuild from 'esbuild';
 import htmlPlugin from '@chialab/esbuild-plugin-html';
 import * as R from 'ramda';
+import http from 'http';
+
 
 (async () => {
   const isDev = process.env.NODE_ENV === 'development'
@@ -51,7 +53,7 @@ import * as R from 'ramda';
       servedir: 'dist',
       port: 3000,
     }, () => {
-      console.log('Server started on port 3000')
+      console.log('Server started on http://localhost:3000');
     });
 
     // context.watch()

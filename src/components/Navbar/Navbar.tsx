@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useWallet from "../../hooks/useWallet";
 import NavbarBrand from "./NavbarBrand";
 import NavbarItem from "./NavbarItem";
 
 type Props = {};
 
 export const Navbar: React.FC<Props> = ({}) => {
+  const { wallet, shortWallet } = useWallet();
+
   return (
     <>
       <div className="bg-primary flex w-full shadow-lg">
@@ -13,7 +16,11 @@ export const Navbar: React.FC<Props> = ({}) => {
           <NavbarBrand to="/">NFT Viewer</NavbarBrand>
           <div className="flex gap-2 text-center">
             <NavbarItem to="/">About</NavbarItem>
-            <NavbarItem to="/connect">Connect Wallet</NavbarItem>
+            {wallet ? (
+              <NavbarItem to="/wallet">{shortWallet}</NavbarItem>
+            ) : (
+              <NavbarItem to="/connect">Connect Wallet</NavbarItem>
+            )}
           </div>
         </div>
       </div>

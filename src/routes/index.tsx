@@ -1,13 +1,21 @@
 import React from "react";
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Home from "./Home";
 import Connect from "./Connect";
+import ErrorBoundary from "../components/ErrorBoundary";
 
-export const router = createHashRouter([
+const createRouter =
+  process.env.NODE_ENV === "development"
+    ? createHashRouter
+    : createBrowserRouter;
+
+// export const router = createHashRouter([
+export const router = createRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: "/",
