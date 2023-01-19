@@ -24,8 +24,15 @@ export class NFT extends Eth {
     this.contract.methods.symbol().call().then((symbol: string) => { this.symbol = symbol });
   }
 
-  getReceived(wallet: string) {
+  getEtherScanLink() {
+    return `https://etherscan.io/address/${this.contractAddress}#code`;
+  }
 
+  getOpenSeaLink(tokenId?: string) {
+    return `https://opensea.io/assets/${this.contractAddress}/${tokenId || ''}`;
+  }
+
+  getReceived(wallet: string) {
     return this.contract.getPastEvents('Transfer', {
       filter: { to: wallet },
       fromBlock: 0,
@@ -63,6 +70,19 @@ export class NFT extends Eth {
     });
 
     return owned;
+  }
+
+  async ownerOf(tokenId: string): Promise<string> {
+    return this.contract.methods.ownerOf(tokenId).call();
+  }
+
+  async balanceOf(wallet: string): Promise<number> {
+    return this.contract.methods.balanceOf(wallet).call();
+  }
+
+  async getTokenUri(tokenId: string): Promise<string> {
+    // return this.contract.methods.baseURI().call();
+    return this.contract.methods.tokenURI(tokenId).call();
   }
 
 }

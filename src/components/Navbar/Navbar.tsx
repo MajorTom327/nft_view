@@ -20,7 +20,9 @@ export const Navbar: React.FC<Props> = ({}) => {
           <div className="flex gap-2 text-center">
             <NavbarItem to="/events">Transferts</NavbarItem>
             {wallet ? (
-              <NavbarItem>{shortWallet}</NavbarItem>
+              <NavbarItem to={`https://etherscan.io/address/${wallet}`}>
+                {shortWallet}
+              </NavbarItem>
             ) : (
               <NavbarItem to="/connect">Connect Wallet</NavbarItem>
             )}

@@ -1,6 +1,6 @@
 import { NFT } from "./NFT";
 import type { AbiItem } from 'web3-utils';
-import abi from './abi/buds.json';
+import abi from './abi/captains.json';
 
 export class CaptainsNft extends NFT {
   constructor() {

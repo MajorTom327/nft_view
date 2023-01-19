@@ -30,6 +30,14 @@ export const NavbarItem: React.FC<Props> = ({
   if (isNil(to)) {
     return <div className={classes}>{children}</div>;
   }
+
+  if (to.startsWith("http")) {
+    return (
+      <a href={to} target="_blank" className={classes}>
+        {children}
+      </a>
+    );
+  }
   return (
     <Link to={to} className={classes}>
       {children}

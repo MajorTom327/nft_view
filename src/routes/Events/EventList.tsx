@@ -6,14 +6,14 @@ import { Table } from "../../components/Table";
 import { Card } from "../../components/Card";
 import { Title } from "../../components/Title";
 import { CiInboxIn, CiInboxOut } from "react-icons/ci";
+import { path } from "ramda";
 
 type Props = {};
 
 export const EventTypeView: React.FC<{ value: any; row: any }> = ({ row }) => {
   const { wallet } = useWallet();
 
-  const { returnValues } = row;
-  const { from, to } = returnValues;
+  const from = path(["returnValues", "from"], row);
 
   // return null;
   return (

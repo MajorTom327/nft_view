@@ -1,6 +1,4 @@
-import Bluebird from "bluebird";
-import { values } from "ramda";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BudsNft } from "../web3/Buds";
 import { CaptainsNft } from "../web3/Captain";
 import { NFT } from "../web3/NFT";
