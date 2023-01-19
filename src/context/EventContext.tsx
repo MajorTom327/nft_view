@@ -1,5 +1,5 @@
 import Bluebird from "bluebird";
-import { assoc, compose, flatten, values } from "ramda";
+import { assoc, compose, flatten, prop, reverse, sortBy, values } from "ramda";
 import React, {
   createContext,
   useContext,
@@ -42,7 +42,14 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({
         );
       });
     }).then((events) => {
-      setEvents(flatten(events));
+      // @ts-ignore
+      const sortedEvents = compose(
+        reverse as (events: any) => any[],
+        sortBy(prop("blockNumber")),
+        flatten
+      )(events);
+
+      setEvents(sortedEvents);
     });
   }, [wallet]);
 
