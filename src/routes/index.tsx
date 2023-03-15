@@ -10,6 +10,7 @@ import Connect from "./Connect";
 import ErrorBoundary from "../components/ErrorBoundary";
 import Events from "./Events";
 import EventsList from "./Events/EventList";
+import Teams from "./teams";
 
 const createRouter =
   process.env.NODE_ENV === "development"
@@ -40,6 +41,10 @@ export const router = createRouter([
             element: <EventsList />,
           },
         ],
+      },
+      {
+        path: "/teams",
+        element: <Teams />,
       },
       // {
       //   path: "/supply",
